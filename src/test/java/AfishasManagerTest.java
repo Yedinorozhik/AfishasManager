@@ -33,6 +33,24 @@ class AfishasManagerTest {
     }
 
     @Test
+    public void findAllMovieNullLimit() {
+        AfishasManager manager = new AfishasManager();
+
+        String[] expected = {};
+        String[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findAllMovieOneLimit() {
+        AfishasManager manager = new AfishasManager();
+        manager.addMovie("One");
+        String[] expected = {"One"};
+        String[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void findAllMovieLessLimit() {
         AfishasManager manager = new AfishasManager();
         manager.addMovie("One");
@@ -51,6 +69,36 @@ class AfishasManagerTest {
         manager.addMovie("Four");
         manager.addMovie("Five");
         String[] expected = {"Five", "Four", "Three", "Two", "One"};
+        String[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findAllMovieOverLimit() {
+        AfishasManager manager = new AfishasManager();
+        manager.addMovie("One");
+        manager.addMovie("Two");
+        manager.addMovie("Three");
+        manager.addMovie("Four");
+        manager.addMovie("Five");
+        manager.addMovie("Six");
+        String[] expected = {"Six", "Five", "Four", "Three", "Two"};
+        String[] actual = manager.findLast();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findAllMovieOverMoreLimit() {
+        AfishasManager manager = new AfishasManager();
+        manager.addMovie("One");
+        manager.addMovie("Two");
+        manager.addMovie("Three");
+        manager.addMovie("Four");
+        manager.addMovie("Five");
+        manager.addMovie("Six");
+        manager.addMovie("Seven");
+        manager.addMovie("Eight");
+        String[] expected = {"Eight", "Seven", "Six", "Five", "Four"};
         String[] actual = manager.findLast();
         Assertions.assertArrayEquals(expected, actual);
     }
